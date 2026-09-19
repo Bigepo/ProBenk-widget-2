@@ -1,13 +1,11 @@
 package no.probenk.widget;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.Build;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import org.json.JSONObject;
@@ -20,6 +18,8 @@ public class MainActivity extends Activity {
     private EditText baseUrl;
     private EditText pairCode;
     private TextView status;
+    private TextView transparencyValue;
+    private SeekBar transparencySeek;
     private Button connect;
     private Button test;
 
@@ -31,10 +31,37 @@ public class MainActivity extends Activity {
         baseUrl = findViewById(R.id.baseUrl);
         pairCode = findViewById(R.id.pairCode);
         status = findViewById(R.id.statusText);
+        transparencyValue = findViewById(R.id.transparencyValue);
+        transparencySeek = findViewById(R.id.transparencySeek);
         connect = findViewById(R.id.connectButton);
         test = findViewById(R.id.testButton);
 
         baseUrl.setText(Prefs.baseUrl(this));
+
+        int savedTransparency = Prefs.widgetTransparency(this);
+        transparencySeek.setProgress(savedTransparency);
+        updateTransparencyLabel(savedTransparency);
+
+        transparencySeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                updateTransparencyLabel(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // Ingen handling nødvendig.
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int percent = seekBar.getProgress();
+                Prefs.setWidgetTransparency(MainActivity.this, percent);
+                ProBenkWidgetProvider.refreshAll(MainActivity.this, false);
+                status.setText("Gjennomsiktighet satt til " + percent + " %.");
+            }
+        });
+
         if (!Prefs.token(this).isEmpty()) {
             status.setText("Tilkoblet" + (Prefs.userName(this).isEmpty() ? "" : " som " + Prefs.userName(this)) + ".");
         } else {
@@ -47,6 +74,10 @@ public class MainActivity extends Activity {
             ProBenkWidgetProvider.refreshAll(this, true);
             status.setText("Oppdatering sendt til widgeten.");
         });
+    }
+
+    private void updateTransparencyLabel(int percent) {
+        transparencyValue.setText(percent + " %");
     }
 
     private void doPair() {

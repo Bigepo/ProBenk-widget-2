@@ -103,6 +103,11 @@ public class ProBenkWidgetProvider extends AppWidgetProvider {
 
     private static RemoteViews baseViews(Context context) {
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_probenk);
+
+        int transparency = Prefs.widgetTransparency(context);
+        int imageAlpha = Math.round(255f * (100 - transparency) / 100f);
+        rv.setInt(R.id.widgetBackground, "setImageAlpha", imageAlpha);
+
         rv.setOnClickPendingIntent(R.id.refreshButton, refreshIntent(context));
         return rv;
     }
@@ -148,6 +153,7 @@ public class ProBenkWidgetProvider extends AppWidgetProvider {
         int rowsToShow = minHeight < 145 ? 1 : (minHeight < 245 ? 3 : 5);
 
         JSONArray source = todayCount > 0 ? today : upcoming;
+        boolean showingUpcoming = todayCount == 0;
         int available = source == null ? 0 : source.length();
         int count = Math.min(rowsToShow, available);
         setRowsVisible(rv, count);
@@ -156,6 +162,7 @@ public class ProBenkWidgetProvider extends AppWidgetProvider {
             JSONObject item = source.optJSONObject(i);
             if (item == null) continue;
 
+            String itemDate = item.optString("date", "");
             String time = item.optString("time", "");
             String label = item.optString("label", "Oppdrag");
             String customer = item.optString("customer_name", "");
@@ -163,7 +170,13 @@ public class ProBenkWidgetProvider extends AppWidgetProvider {
             String address = item.optString("address", "");
             int projectId = item.optInt("project_id", 0);
 
-            String top = (time.isEmpty() ? "--:--" : time) + "  " + label;
+            String top;
+            if (showingUpcoming && !itemDate.isEmpty()) {
+                top = prettyEventDate(itemDate) + " · " + (time.isEmpty() ? "--:--" : time) + " " + label;
+            } else {
+                top = (time.isEmpty() ? "--:--" : time) + "  " + label;
+            }
+
             String bottom = "#" + projectId + " " + (customer.isEmpty() ? title : customer);
             if (!address.isEmpty()) bottom += " · " + address;
 
@@ -211,6 +224,17 @@ public class ProBenkWidgetProvider extends AppWidgetProvider {
         try {
             LocalDate d = LocalDate.parse(iso);
             DateTimeFormatter f = DateTimeFormatter.ofPattern("EEE d. MMM", new Locale("nb", "NO"));
+            String s = d.format(f);
+            return s.substring(0, 1).toUpperCase(new Locale("nb", "NO")) + s.substring(1);
+        } catch (Exception e) {
+            return iso;
+        }
+    }
+
+    private static String prettyEventDate(String iso) {
+        try {
+            LocalDate d = LocalDate.parse(iso);
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("EEEE dd.MM", new Locale("nb", "NO"));
             String s = d.format(f);
             return s.substring(0, 1).toUpperCase(new Locale("nb", "NO")) + s.substring(1);
         } catch (Exception e) {
