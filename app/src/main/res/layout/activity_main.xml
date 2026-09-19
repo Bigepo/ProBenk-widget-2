@@ -54,7 +54,7 @@
             android:singleLine="true"
             android:textColor="@color/pb_white"
             android:textColorHint="@color/pb_muted"
-            android:hint="https://probenk.no/admin/" />
+            android:hint="https://probenk.no/probenk_portal/admin/" />
 
         <TextView
             android:layout_width="match_parent"

@@ -10,6 +10,9 @@ final class Prefs {
     private static final String USER = "user_name";
     private static final String WIDGET_TRANSPARENCY = "widget_transparency";
 
+    private static final String OLD_BASE = "https://probenk.no/admin/";
+    private static final String NEW_BASE = "https://probenk.no/probenk_portal/admin/";
+
     private Prefs() {}
 
     static SharedPreferences p(Context c) {
@@ -17,7 +20,15 @@ final class Prefs {
     }
 
     static String baseUrl(Context c) {
-        return normalize(p(c).getString(BASE, c.getString(R.string.default_base_url)));
+        String saved = normalize(p(c).getString(BASE, c.getString(R.string.default_base_url)));
+
+        // Automatisk migrering av eksisterende installasjoner som fortsatt har gammel portalsti lagret.
+        if (OLD_BASE.equals(saved)) {
+            saved = NEW_BASE;
+            p(c).edit().putString(BASE, saved).apply();
+        }
+
+        return saved;
     }
 
     static String token(Context c) {
@@ -39,8 +50,13 @@ final class Prefs {
     }
 
     static void saveConnection(Context c, String base, String token, String user) {
+        String normalizedBase = normalize(base);
+        if (OLD_BASE.equals(normalizedBase)) {
+            normalizedBase = NEW_BASE;
+        }
+
         p(c).edit()
-                .putString(BASE, normalize(base))
+                .putString(BASE, normalizedBase)
                 .putString(TOKEN, token == null ? "" : token)
                 .putString(USER, user == null ? "" : user)
                 .apply();

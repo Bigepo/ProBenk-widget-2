@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">ProBenk Widget</string>
     <string name="widget_name">ProBenk</string>
-    <string name="default_base_url">https://probenk.no/admin/</string>
+    <string name="default_base_url">https://probenk.no/probenk_portal/admin/</string>
 </resources>
