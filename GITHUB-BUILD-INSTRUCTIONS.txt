@@ -1,0 +1,13 @@
+PROBENK WIDGET - BYGG APK MED GITHUB
+
+Denne mappen er klar til å legges i GitHub-repoet.
+
+1. Last opp ALT INNHOLD i denne ProBenkWidget-mappen til roten av repoet Bigepo/ProBenk-widget-2.
+   Det betyr at build.gradle, settings.gradle, app/, .github/ osv. skal ligge direkte i repoet.
+2. Commit til main.
+3. GitHub Actions starter automatisk.
+4. Åpne repoet > Actions > Build ProBenk Widget APK.
+5. Når jobben er grønn, åpne kjøringen og last ned artifact: ProBenk-Widget-v1-APK.
+6. Pakk ut artifact-zipen. Der ligger ProBenk-Widget-v1.apk som kan installeres på Android.
+
+APK-en er en debug-signert installasjonsfil. Det er helt greit for intern bruk/test på egne telefoner.

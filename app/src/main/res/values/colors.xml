@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pb_orange">#FF6A00</color>
+    <color name="pb_dark">#161A20</color>
+    <color name="pb_dark_2">#20262E</color>
+    <color name="pb_white">#FFFFFF</color>
+    <color name="pb_muted">#B8C0CC</color>
+    <color name="pb_line">#34404C</color>
+</resources>

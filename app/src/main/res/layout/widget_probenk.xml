@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/widget_bg">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="105dp"
+            android:layout_height="34dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/probenk_logo_white"
+            android:contentDescription="ProBenk" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/pb_muted"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/refreshButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:text="↻"
+            android:textColor="@color/pb_orange"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/summaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="7dp"
+        android:textColor="@color/pb_white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="42dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="6dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="6dp"
+        android:background="@drawable/row_bg">
+        <TextView android:id="@+id/row1Title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_white" android:textSize="13sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/row1Sub" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_muted" android:textSize="11sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/row2" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="42dp" android:layout_marginTop="5dp" android:gravity="center_vertical" android:orientation="vertical" android:paddingLeft="10dp" android:paddingTop="6dp" android:paddingRight="10dp" android:paddingBottom="6dp" android:background="@drawable/row_bg">
+        <TextView android:id="@+id/row2Title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_white" android:textSize="13sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/row2Sub" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_muted" android:textSize="11sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/row3" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="42dp" android:layout_marginTop="5dp" android:gravity="center_vertical" android:orientation="vertical" android:paddingLeft="10dp" android:paddingTop="6dp" android:paddingRight="10dp" android:paddingBottom="6dp" android:background="@drawable/row_bg">
+        <TextView android:id="@+id/row3Title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_white" android:textSize="13sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/row3Sub" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_muted" android:textSize="11sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/row4" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="42dp" android:layout_marginTop="5dp" android:gravity="center_vertical" android:orientation="vertical" android:paddingLeft="10dp" android:paddingTop="6dp" android:paddingRight="10dp" android:paddingBottom="6dp" android:background="@drawable/row_bg">
+        <TextView android:id="@+id/row4Title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_white" android:textSize="13sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/row4Sub" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_muted" android:textSize="11sp"/>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/row5" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="42dp" android:layout_marginTop="5dp" android:gravity="center_vertical" android:orientation="vertical" android:paddingLeft="10dp" android:paddingTop="6dp" android:paddingRight="10dp" android:paddingBottom="6dp" android:background="@drawable/row_bg">
+        <TextView android:id="@+id/row5Title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_white" android:textSize="13sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/row5Sub" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="@color/pb_muted" android:textSize="11sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/footerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:gravity="center_vertical|end"
+        android:textColor="@color/pb_muted"
+        android:textSize="10sp" />
+
+</LinearLayout>
